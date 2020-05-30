@@ -1,3 +1,5 @@
+package com.jclemos.pacman;
+
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextCharacter;
@@ -14,7 +16,7 @@ import java.io.IOException;
 
 public class Application {
     public static void main(String[] args) throws IOException {
-        try {
+       /* try {
             Terminal terminal = new DefaultTerminalFactory().setInitialTerminalSize(new TerminalSize(59, 17)).createTerminal();
 
             Screen screen = new TerminalScreen(terminal);
@@ -53,7 +55,11 @@ public class Application {
 
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
+
+       Game game = new Game();
+       game.run();
+
 
     }
 }
