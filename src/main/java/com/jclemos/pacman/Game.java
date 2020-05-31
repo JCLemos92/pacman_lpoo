@@ -28,6 +28,8 @@ public class Game {
     private Player pacman;
     private Wall wall;
     private Maze maze;
+    private int ghostNumber = 4;
+
 
 
     public Game() throws IOException {
@@ -36,6 +38,7 @@ public class Game {
         pacman = new Player(2, 2, DynamicEntity.Direction.Down, 1, 3);
         wall = new Wall(1, 1);
         maze = new Maze();
+        //ghost = new NPC(20, 14, DynamicEntity.Direction.Up, 2, 200);
         inputHandler = new InputHandler(pacman);
 
         screen.setCursorPosition(null);   // we don't need a cursor
@@ -58,6 +61,7 @@ public class Game {
         screen.clear();
         maze.draw(graphics);
         pacman.draw(graphics);
+        //ghost.draw(graphics);
         screen.refresh();
     }
 }
