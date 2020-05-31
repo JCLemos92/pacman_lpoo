@@ -7,8 +7,8 @@ public class InputHandler {
     private Player player;
     private Maze maze;
 
-    public InputHandler(Player player, Maze maze) {
-        this.player = player;
+    public InputHandler(Maze maze) {
+        this.player = maze.getPacman();
         this.maze = maze;
     }
 
