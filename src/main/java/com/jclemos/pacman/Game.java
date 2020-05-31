@@ -2,6 +2,8 @@ package com.jclemos.pacman;
 
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextCharacter;
+import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.graphics.TextGraphicsWriter;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
@@ -23,6 +25,8 @@ public class Game {
 
     private int x = 10;
     private int y = 10;
+    private TextGraphics graphics;
+    Player pacman = new Player(2, 2, DynamicEntity.Direction.Down, 1, 3);
 
 
     public Game() throws IOException {
@@ -32,6 +36,7 @@ public class Game {
         screen.setCursorPosition(null);   // we don't need a cursor
         screen.startScreen();             // screens must be started
         screen.doResizeIfNecessary();     // resize screen if necessary
+        graphics = screen.newTextGraphics();
     }
 
     public void run() throws IOException, InterruptedException {
@@ -56,7 +61,7 @@ public class Game {
         
     private void draw() throws IOException {
         screen.clear();
-        screen.setCharacter(x, y, new TextCharacter('X'));
+        pacman.draw(graphics);
         screen.refresh();
     }
 
