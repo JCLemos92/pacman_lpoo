@@ -13,16 +13,14 @@ public class Maze {
         int mazeColumnIndex = 0;
 
         for (char[] elementArray : mazeArray) {
-            mazeRowIndex++;
-
             for(char element : elementArray) {
-                mazeColumnIndex++;
-
                 if (element == 'W') {
                     graphics.setBackgroundColor(TextColor.Factory.fromString("#0071bc"));
                     graphics.fillRectangle(new TerminalPosition(mazeColumnIndex, mazeRowIndex), new TerminalSize(1, 1), ' ');
                 }
+                mazeColumnIndex++;
             }
+            mazeRowIndex++;
         }
     }
 }
