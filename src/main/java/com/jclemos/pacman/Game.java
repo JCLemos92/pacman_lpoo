@@ -14,6 +14,9 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
+import static java.awt.Color.white;
+import static java.lang.Thread.sleep;
+
 public class Game {
     private Terminal terminal;
     private Screen screen;
@@ -31,19 +34,24 @@ public class Game {
         screen.doResizeIfNecessary();     // resize screen if necessary
     }
 
-    public void run() throws IOException {
+    public void run() throws IOException, InterruptedException {
+        KeyEventDispatcher keyEventDispatcher = e -> {
+
+            if(e.getID() == KeyEvent.KEY_RELEASED )
+                return true;
+
+            processKey(e);
 
 
-        KeyEventDispatcher keyEventDispatcher = new KeyEventDispatcher() {
-            @Override
-            public boolean dispatchKeyEvent(final KeyEvent e) {
-
-              System.out.println(e);
-              return true;
-            }
+            return true;
         };
 
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(keyEventDispatcher);
+
+        while(true){
+            sleep(60);
+            draw();
+        }
     }
         
     private void draw() throws IOException {
@@ -52,19 +60,23 @@ public class Game {
         screen.refresh();
     }
 
-    private void processKey(KeyStroke key){
-        System.out.println(key);
-        if (key.getKeyType() == KeyType.ArrowRight){
-            x += 1;
-        }
-        if (key.getKeyType() == KeyType.ArrowLeft){
-            x -= 1;
-        }
-        if (key.getKeyType() == KeyType.ArrowUp){
-            y -= 1;
-        }
-        if (key.getKeyType() == KeyType.ArrowDown){
-            y += 1;
+    public void processKey(KeyEvent key){
+        switch (key.getKeyCode()) {
+            case KeyEvent.VK_DOWN:
+                y += 1;
+                break;
+            case KeyEvent.VK_LEFT:
+                x -= 1;
+                break;
+            case KeyEvent.VK_RIGHT:
+                x += 1;
+                break;
+            case KeyEvent.VK_UP:
+                y -= 1;
+                break;
+
+            default:
+                return;
         }
     }
 }
