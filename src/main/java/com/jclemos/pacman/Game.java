@@ -23,37 +23,30 @@ public class Game {
     private Terminal terminal;
     private Screen screen;
 
-    private int x = 10;
-    private int y = 10;
     private TextGraphics graphics;
-    Player pacman = new Player(2, 2, DynamicEntity.Direction.Down, 1, 3);
-    Wall wall = new Wall(1, 1);
-    Maze maze = new Maze();
+    private InputHandler inputHandler;
+    private Player pacman;
+    private Wall wall;
+    private Maze maze;
 
 
     public Game() throws IOException {
         terminal = new DefaultTerminalFactory().setInitialTerminalSize(new TerminalSize(59, 17)).createTerminal();
         screen = new TerminalScreen(terminal);
+        pacman = new Player(2, 2, DynamicEntity.Direction.Down, 1, 3);
+        wall = new Wall(1, 1);
+        maze = new Maze();
+        inputHandler = new InputHandler(pacman);
 
         screen.setCursorPosition(null);   // we don't need a cursor
         screen.startScreen();             // screens must be started
         screen.doResizeIfNecessary();     // resize screen if necessary
         graphics = screen.newTextGraphics();
+
+        inputHandler.initInputHandler();
     }
 
     public void run() throws IOException, InterruptedException {
-        KeyEventDispatcher keyEventDispatcher = e -> {
-
-            if(e.getID() == KeyEvent.KEY_RELEASED )
-                return true;
-
-            processKey(e);
-
-
-            return true;
-        };
-
-        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(keyEventDispatcher);
 
         while(true){
             sleep(60);
@@ -64,26 +57,7 @@ public class Game {
     private void draw() throws IOException {
         screen.clear();
         maze.draw(graphics);
+        pacman.draw(graphics);
         screen.refresh();
-    }
-
-    public void processKey(KeyEvent key){
-        switch (key.getKeyCode()) {
-            case KeyEvent.VK_DOWN:
-                y += 1;
-                break;
-            case KeyEvent.VK_LEFT:
-                x -= 1;
-                break;
-            case KeyEvent.VK_RIGHT:
-                x += 1;
-                break;
-            case KeyEvent.VK_UP:
-                y -= 1;
-                break;
-
-            default:
-                return;
-        }
     }
 }
