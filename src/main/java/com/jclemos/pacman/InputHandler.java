@@ -4,10 +4,12 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class InputHandler {
-    Player player;
+    private Player player;
+    private Maze maze;
 
-    public InputHandler(Player player) {
+    public InputHandler(Player player, Maze maze) {
         this.player = player;
+        this.maze = maze;
     }
 
     public void initInputHandler(){
@@ -28,16 +30,24 @@ public class InputHandler {
     private void processKey(KeyEvent key){
         switch (key.getKeyCode()) {
             case KeyEvent.VK_DOWN:
-                player.setY(player.getY() + 1);
+                if(!maze.mazeCollision(player.getX(), player.getY() + 1)){
+                    player.setY(player.getY() + 1);
+                }
                 break;
             case KeyEvent.VK_LEFT:
-                player.setX(player.getX() - 1);
+                if(!maze.mazeCollision(player.getX() - 1, player.getY())){
+                    player.setX(player.getX() - 1);
+                }
                 break;
             case KeyEvent.VK_RIGHT:
-                player.setX(player.getX() + 1);
+                if(!maze.mazeCollision(player.getX() + 1, player.getY())){
+                    player.setX(player.getX() + 1);
+                }
                 break;
             case KeyEvent.VK_UP:
-                player.setY(player.getY() - 1);
+                if(!maze.mazeCollision(player.getX(), player.getY() - 1)) {
+                    player.setY(player.getY() - 1);
+                }
                 break;
 
             default:

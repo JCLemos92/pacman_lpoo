@@ -35,11 +35,11 @@ public class Game {
     public Game() throws IOException {
         terminal = new DefaultTerminalFactory().setInitialTerminalSize(new TerminalSize(59, 17)).createTerminal();
         screen = new TerminalScreen(terminal);
-        pacman = new Player(2, 2, DynamicEntity.Direction.Down, 1, 3);
+        pacman = new Player(1, 1, DynamicEntity.Direction.Down, 1, 3);
         wall = new Wall(1, 1);
         maze = new Maze();
         //ghost = new NPC(20, 14, DynamicEntity.Direction.Up, 2, 200);
-        inputHandler = new InputHandler(pacman);
+        inputHandler = new InputHandler(pacman, maze);
 
         screen.setCursorPosition(null);   // we don't need a cursor
         screen.startScreen();             // screens must be started
