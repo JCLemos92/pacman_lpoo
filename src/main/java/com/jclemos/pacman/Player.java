@@ -37,6 +37,6 @@ public class Player extends DynamicEntity{
 
     public void draw(TextGraphics graphics){
         graphics.setBackgroundColor(TextColor.Factory.fromString("#ffe118"));
-        graphics.fillRectangle(new TerminalPosition(0, 3), new TerminalSize(1, 1), ' ');
+        graphics.fillRectangle(new TerminalPosition(x, y), new TerminalSize(1, 1), ' ');
     }
 }

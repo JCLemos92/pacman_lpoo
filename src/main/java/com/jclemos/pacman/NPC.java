@@ -40,11 +40,11 @@ public class NPC extends DynamicEntity{
     public void draw(TextGraphics graphics){
         if(this.state == State.Normal){
             graphics.setBackgroundColor(TextColor.Factory.fromString("#ed1d28"));
-            graphics.fillRectangle(new TerminalPosition(0, 6), new TerminalSize(1, 1), ' ');
+            graphics.fillRectangle(new TerminalPosition(x, y), new TerminalSize(1, 1), ' ');
         }
         else{
             graphics.setBackgroundColor(TextColor.Factory.fromString("#ccff10"));
-            graphics.fillRectangle(new TerminalPosition(0, 9), new TerminalSize(1, 1), ' ');
+            graphics.fillRectangle(new TerminalPosition(x, y), new TerminalSize(1, 1), ' ');
         }
     }
 }

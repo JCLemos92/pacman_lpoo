@@ -27,6 +27,8 @@ public class Game {
     private int y = 10;
     private TextGraphics graphics;
     Player pacman = new Player(2, 2, DynamicEntity.Direction.Down, 1, 3);
+    Wall wall = new Wall(1, 1);
+    Maze maze = new Maze();
 
 
     public Game() throws IOException {
@@ -61,7 +63,7 @@ public class Game {
         
     private void draw() throws IOException {
         screen.clear();
-        pacman.draw(graphics);
+        maze.draw(graphics);
         screen.refresh();
     }
 
